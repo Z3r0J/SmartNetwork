@@ -2,7 +2,8 @@
 
 namespace SmartNetwork.Infrastructure.Persistence
 {
-    public class ServicesRegistration
+    public static class ServicesRegistration
     {
+
     }
 }
