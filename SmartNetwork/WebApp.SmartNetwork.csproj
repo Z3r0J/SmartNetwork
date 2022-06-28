@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmartNetwork.Core.Application\SmartNetwork.Core.Application.csproj" />
+    <ProjectReference Include="..\SmartNetwork.Infrastructure.Persistence\SmartNetwork.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\SmartNetwork.Infrastructure.Shared\SmartNetwork.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
