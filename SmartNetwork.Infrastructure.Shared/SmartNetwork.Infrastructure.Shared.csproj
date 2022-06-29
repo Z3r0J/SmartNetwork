@@ -10,4 +10,8 @@
     <PackageReference Include="MimeKit" Version="3.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SmartNetwork.Core.Application\SmartNetwork.Core.Application.csproj" />
+  </ItemGroup>
+
 </Project>

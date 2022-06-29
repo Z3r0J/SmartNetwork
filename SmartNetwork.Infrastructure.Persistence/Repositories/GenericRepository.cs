@@ -17,7 +17,7 @@ namespace SmartNetwork.Infrastructure.Persistence.Repositories
             _applicationContext = applicationContext;
         }
 
-        public async Task<Entity> AddAsync(Entity entity) {
+        public virtual async Task<Entity> AddAsync(Entity entity) {
 
             await _applicationContext.AddAsync(entity);
             await _applicationContext.SaveChangesAsync();
@@ -25,19 +25,19 @@ namespace SmartNetwork.Infrastructure.Persistence.Repositories
             return entity;
         }
 
-        public async Task<List<Entity>> GetAllAsync() {
+        public virtual async Task<List<Entity>> GetAllAsync() {
 
             return await _applicationContext.Set<Entity>().ToListAsync();
         
         }
 
-        public async Task<Entity> GetByIdAsync(int id) {
+        public virtual async Task<Entity> GetByIdAsync(int id) {
 
             return await _applicationContext.Set<Entity>().FindAsync(id);
 
         }
 
-        public async Task<List<Entity>> GetAllWithIncludeAsync(List<string> properties) {
+        public virtual async Task<List<Entity>> GetAllWithIncludeAsync(List<string> properties) {
 
             var query = _applicationContext.Set<Entity>().AsQueryable();
 
@@ -58,7 +58,7 @@ namespace SmartNetwork.Infrastructure.Persistence.Repositories
         
         }
 
-        public async Task DeleteAsync(Entity entity) {
+        public virtual async Task DeleteAsync(Entity entity) {
 
             _applicationContext.Set<Entity>().Remove(entity);
             await _applicationContext.SaveChangesAsync();

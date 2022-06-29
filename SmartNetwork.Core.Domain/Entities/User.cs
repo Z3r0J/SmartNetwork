@@ -11,6 +11,7 @@ namespace SmartNetwork.Core.Domain.Entities
     {
         public string Name { get; set; }
         public string LastName { get; set; }
+        public string PhotoUrl { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Username { get; set; }
