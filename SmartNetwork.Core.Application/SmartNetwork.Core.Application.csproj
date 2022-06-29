@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <Folder Include="ViewModel\Likes\" />
+    <Folder Include="ViewModel\Comments\" />
+    <Folder Include="ViewModel\Friends\" />
+    <Folder Include="ViewModel\Posts\" />
+    <Folder Include="ViewModel\Users\" />
   </ItemGroup>
 
   <ItemGroup>

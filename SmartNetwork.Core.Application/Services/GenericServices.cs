@@ -23,7 +23,7 @@ namespace SmartNetwork.Core.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<SaveViewModel> Add(SaveViewModel vm) {
+        public async virtual Task<SaveViewModel> Add(SaveViewModel vm) {
 
             Entity entity = _mapper.Map<Entity>(vm);
 
@@ -35,7 +35,7 @@ namespace SmartNetwork.Core.Application.Services
         
         }
 
-        public async Task<SaveViewModel> GetByIdSaveViewModel(int id) {
+        public async virtual Task<SaveViewModel> GetByIdSaveViewModel(int id) {
 
             Entity entity = await _repository.GetByIdAsync(id);
 
@@ -45,14 +45,14 @@ namespace SmartNetwork.Core.Application.Services
         
         }
 
-        public async Task<List<ViewModel>> GetAllViewModel() {
+        public async virtual Task<List<ViewModel>> GetAllViewModel() {
 
             var entityList = await _repository.GetAllAsync();
 
             return _mapper.Map<List<ViewModel>>(entityList);
         }
 
-        public async Task Update(SaveViewModel vm, int id) {
+        public async virtual Task Update(SaveViewModel vm, int id) {
 
             Entity entity = _mapper.Map<Entity>(vm);
 
@@ -60,7 +60,7 @@ namespace SmartNetwork.Core.Application.Services
 
         }
 
-        public async Task Delete(int id) {
+        public async virtual Task Delete(int id) {
 
             Entity entity = await _repository.GetByIdAsync(id);
 
