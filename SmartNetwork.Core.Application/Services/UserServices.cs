@@ -43,7 +43,7 @@ namespace SmartNetwork.Core.Application.Services
             await _emailServices.SendAsync(new() { 
             To = Savevm.Email,
             Subject = "Welcome to SmartNetwork",
-            Body=$"The best network to activate you account click: <a href='https://localhost:/{Savevm.Id}'>Here</a>"
+            Body=$"The best network to activate you account click: <a href='https://localhost:44334/User/Activate/{Savevm.Id}'>Here</a>"
             
             });;
 
