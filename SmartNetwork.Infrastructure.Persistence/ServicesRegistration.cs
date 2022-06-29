@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SmartNetwork.Core.Application.Interfaces.Repository;
 using SmartNetwork.Infrastructure.Persistence.Contexts;
 using SmartNetwork.Infrastructure.Persistence.Repositories;
 using System;

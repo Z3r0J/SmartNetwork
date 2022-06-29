@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SmartNetwork.Core.Application;
 using SmartNetwork.Infrastructure.Persistence;
 using SmartNetwork.Infrastructure.Shared;
 using System;
@@ -28,6 +29,7 @@ namespace SmartNetwork
             services.AddControllersWithViews();
             services.AddPersistanceInfrastructure(Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddApplicationLayer();
             services.AddSharedInfrastructure(Configuration);
         }
 
