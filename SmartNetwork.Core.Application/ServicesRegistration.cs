@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SmartNetwork.Core.Application.Interfaces.Services;
+using SmartNetwork.Core.Application.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,8 @@ namespace SmartNetwork.Core.Application
         public static void AddApplicationLayer(this IServiceCollection service) {
 
             service.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+            service.AddTransient(typeof(IGenericServices<,,>),typeof(GenericServices<,,>));
+            service.AddTransient<IUserServices, UserServices>();
         }
     }
 }

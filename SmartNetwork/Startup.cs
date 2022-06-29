@@ -27,9 +27,13 @@ namespace SmartNetwork
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
             services.AddPersistanceInfrastructure(Configuration);
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddApplicationLayer();
+
             services.AddSharedInfrastructure(Configuration);
         }
 
@@ -57,7 +61,7 @@ namespace SmartNetwork
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=User}/{action=Index}/{id?}");
             });
         }
     }

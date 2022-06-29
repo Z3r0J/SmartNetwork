@@ -101,23 +101,25 @@ namespace SmartNetwork.Infrastructure.Persistence.Contexts
                 .HasMany(user => user.Comments)
                 .WithOne(comment => comment.User)
                 .HasForeignKey(comment=>comment.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
             
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Likes)
                 .WithOne(Like => Like.User)
                 .HasForeignKey(Like=>Like.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<User>()
                 .HasMany(user => user.FriendsByYou)
                 .WithOne(friend => friend.UserFrom)
-                .HasForeignKey(friend => friend.UserFirst);
+                .HasForeignKey(friend => friend.UserFirst)
+                .OnDelete(DeleteBehavior.NoAction);
             
             modelBuilder.Entity<User>()
                 .HasMany(user => user.FriendsByOther)
                 .WithOne(friend => friend.UserTo)
-                .HasForeignKey(friend => friend.UserSecond);
+                .HasForeignKey(friend => friend.UserSecond)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Posts>()
                 .HasMany(post=>post.Likes)

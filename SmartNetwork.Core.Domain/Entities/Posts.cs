@@ -10,7 +10,7 @@ namespace SmartNetwork.Core.Domain.Entities
     public class Posts : AuditableBaseEntity
     {
         public string Body { get; set; }
-        public string? PictureUrl { get; set; }
+        public string PictureUrl { get; set; }
 
 
         public int UserId { get; set; }
