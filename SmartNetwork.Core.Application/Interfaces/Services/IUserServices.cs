@@ -10,5 +10,8 @@ namespace SmartNetwork.Core.Application.Interfaces.Services
 {
     public interface IUserServices : IGenericServices<SaveUserViewModel,UserViewModel,User>
     {
+        Task<UserViewModel> Login(LoginViewModel vm);
+        Task<bool> CheckUsername(string username);
+        Task ChangePassword(string username);
     }
 }

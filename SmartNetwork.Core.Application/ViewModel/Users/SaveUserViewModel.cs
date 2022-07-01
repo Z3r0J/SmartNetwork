@@ -37,8 +37,7 @@ namespace SmartNetwork.Core.Application.ViewModel.Users
         [Compare(nameof(Password),ErrorMessage ="The password doesn't match.")]
         public string ConfirmPassword { get; set; }
         public int Status { get; set; } = 0;
-
-        [Required(ErrorMessage = "Select a profile photo")]
-        public IFormFile Image { get; set; }
+        [DataType(DataType.Upload)]
+        public IFormFile File { get; set; }
     }
 }

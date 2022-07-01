@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.SmartNetwork.Middlewares;
 
 namespace SmartNetwork
 {
@@ -26,6 +27,8 @@ namespace SmartNetwork
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
+
             services.AddControllersWithViews();
 
             services.AddPersistanceInfrastructure(Configuration);
@@ -35,6 +38,8 @@ namespace SmartNetwork
             services.AddApplicationLayer();
 
             services.AddSharedInfrastructure(Configuration);
+
+            services.AddTransient<ValidateUserSession,ValidateUserSession>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +55,7 @@ namespace SmartNetwork
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

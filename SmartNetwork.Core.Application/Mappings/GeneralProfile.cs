@@ -14,7 +14,7 @@ namespace SmartNetwork.Core.Application.Mappings
         public GeneralProfile()
         {
             CreateMap<User, SaveUserViewModel>()
-                .ForMember(dest=>dest.Image,opt=>opt.Ignore())
+                .ForMember(dest=>dest.File,opt=>opt.Ignore())
                 .ForMember(dest=>dest.ConfirmPassword,opt=>opt.Ignore())
                 .ReverseMap()
                 .ForMember(dest=> dest.Created,opt=>opt.Ignore())
@@ -26,6 +26,13 @@ namespace SmartNetwork.Core.Application.Mappings
                 .ForMember(dest=> dest.Comments,opt=>opt.Ignore())
                 .ForMember(dest=> dest.FriendsByOther,opt=>opt.Ignore())
                 .ForMember(dest=> dest.FriendsByYou,opt=>opt.Ignore());
+
+            CreateMap<User, UserViewModel>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
         }
     }
 }

@@ -11,5 +11,6 @@ namespace SmartNetwork.Core.Application.Interfaces.Repository
     public interface IUserRepository : IGenericRepository<User>
     {
         Task<User> LoginAsync(LoginViewModel vm);
+        Task<User> CheckUsername(string username);
     }
 }

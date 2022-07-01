@@ -35,5 +35,11 @@ namespace SmartNetwork.Infrastructure.Persistence.Repositories
             entity.Status = 0;
             return base.AddAsync(entity);
         }
+
+        public async Task<User> CheckUsername(string username) {
+
+            return await _applicationContext.Set<User>().FirstOrDefaultAsync(user => user.Username == username);
+        
+        }
     }
 }

@@ -20,8 +20,4 @@
     <ProjectReference Include="..\SmartNetwork.Infrastructure.Shared\SmartNetwork.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Middlewares\" />
-  </ItemGroup>
-
 </Project>
