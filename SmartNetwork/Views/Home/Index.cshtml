@@ -1,8 +1,63 @@
-﻿@{
+﻿@using SmartNetwork.Core.Application.ViewModel.Users
+@using SmartNetwork.Core.Application.ViewModel.Posts
+
+@model UserViewModel
+
+@{
     ViewData["Title"] = "Home Page";
+    
+}
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        @foreach(PostViewModel vm in Model.Posts){
+            string name = $"@{vm.User.Username}";
+            <div class="col-7 mt-2 mb-3">
+<div class="panel mt-2 mb-3 w-100 h-100 rounded">
+  <div class="panel-body">
+    <div class="pane d-flex align-items-center mt-0 mb-3">
+      <img
+        class="pane-img border rounded-circle"
+        style="width: 52px;
+    height: 55px;"
+        src="@vm.User.PhotoUrl"
+        alt=""
+      />
+      <div class="ms-3">
+        <h6 class="m-0" style="font-weight:600;">@vm.User.Name @vm.User.LastName</h6>
+        <p class="m-0 pane-item text-muted">@name</p>
+      </div>
+
+      <div class="dropdown p-0 ms-auto pane-item">
+<div class="dropdown">
+  <i class="fa-solid fa-ellipsis fs-4 text-muted" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+  </i>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+      </div>
+    </div>
+
+    <div class="card-text fs-5">
+@vm.Body
+
+    </div>
+          <div class="d-flex justify-content-between float-start mt-3 mb-3">
+       <form>
+           <input type="hidden" value="@vm.Id">
+           <button type="submit" class="btn btn-light text-info border border-0 me-1"><i class="fas fa-heart"></i> @vm.LikeCount Likes</button>
+       </form>
+
+       <span class="btn btn-light border-0 ms-1"><i class="fas fa-comment"></i> @vm.CommentCount Comments</span>
+
+    </div>
+  </div>
+</div>
+</div>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
 </div>

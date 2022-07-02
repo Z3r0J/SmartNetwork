@@ -4,7 +4,13 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.inputmask.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function($) {
+    $('#phone').inputmask("+1 999-999-9999");
+});
+</script>
 
 <div class="container-fluid">
     <div class="row">
@@ -33,7 +39,7 @@
                             </div>
                             <div class="col-6 mt-1 mb-3">
                                 <label asp-for="Phone">Phone:</label>
-                                <input asp-for="Phone" class="form-control"/>
+                                <input asp-for="Phone" class="form-control" id="phone"/>
                                 <span asp-validation-for="Phone" class="text-danger"></span>
                             </div>
                         </div>

@@ -23,7 +23,7 @@ namespace SmartNetwork.Core.Application.ViewModel.Users
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Complete the Phone.")]
-        [DataType(DataType.Text)]
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
         [Required(ErrorMessage = "Complete the Username.")]
         [DataType(DataType.Text)]

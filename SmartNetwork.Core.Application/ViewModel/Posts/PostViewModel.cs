@@ -18,5 +18,8 @@ namespace SmartNetwork.Core.Application.ViewModel.Posts
         public UserViewModel User { get; set; }
         public List<LikeViewModel> Likes { get; set; }
         public List<CommentViewModel> Comments { get; set; }
+        public DateTime Created { get; set; }
+        public int LikeCount { get; set; }
+        public int CommentCount { get; set; }
     }
 }

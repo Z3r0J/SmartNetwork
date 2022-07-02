@@ -1,4 +1,5 @@
-﻿using SmartNetwork.Core.Application.ViewModel.Users;
+﻿using SmartNetwork.Core.Application.ViewModel.Posts;
+using SmartNetwork.Core.Application.ViewModel.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,9 @@ namespace SmartNetwork.Core.Application.ViewModel.Friends
         public UserViewModel UserFrom { get; set; }
         public int UserSecond { get; set; }
         public UserViewModel UserTo { get; set; }
+
+        public List<PostViewModel> UserFirstPost { get; set; }
+        public List<PostViewModel> UserSecondPost { get; set; }
+
     }
 }

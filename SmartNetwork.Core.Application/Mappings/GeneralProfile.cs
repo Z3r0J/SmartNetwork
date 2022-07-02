@@ -1,4 +1,8 @@
 ﻿using AutoMapper;
+using SmartNetwork.Core.Application.ViewModel.Comments;
+using SmartNetwork.Core.Application.ViewModel.Friends;
+using SmartNetwork.Core.Application.ViewModel.Likes;
+using SmartNetwork.Core.Application.ViewModel.Posts;
 using SmartNetwork.Core.Application.ViewModel.Users;
 using SmartNetwork.Core.Domain.Entities;
 using System;
@@ -33,6 +37,39 @@ namespace SmartNetwork.Core.Application.Mappings
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.LastModified, opt => opt.Ignore())
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            
+            CreateMap<Posts,PostViewModel>()
+                .ForMember(dest=>dest.LikeCount,opt=>opt.MapFrom(x=>x.Likes.Count))
+                .ForMember(dest=>dest.CommentCount,opt=>opt.MapFrom(x => x.Comments.Count))
+                .ReverseMap()
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<Comment, CommentViewModel>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<Like, LikeViewModel>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<Friend, FriendViewModel>()
+                .ForMember(dest=>dest.UserFirstPost,opt=>opt.Ignore())
+                .ForMember(dest=>dest.UserSecondPost,opt=>opt.Ignore())
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+
         }
     }
 }
