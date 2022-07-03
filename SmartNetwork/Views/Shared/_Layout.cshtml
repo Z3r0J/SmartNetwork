@@ -17,9 +17,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://i.imgur.com/wRkWJvg.png" style="width:160px;"/></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://i.imgur.com/wRkWJvg.png" style="width:140px;"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@
                         @if (User != null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" style="font-size: 18px!important;" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>}
 
                     </ul>
@@ -38,16 +38,16 @@
                             if (User != null)
                             {
                                     <li class="nav-item">
-                                    <span class="nav-link text-dark">Welcome to SmartNetwork, @User.Name @User.LastName!</span>
+                                    <span class="nav-link text-dark" style="font-size: 18px!important;">Welcome to SmartNetwork, @User.Name @User.LastName!</span>
                                     </li>
                                     <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="User" asp-action="Logout">Logout</a>
+                                    <a class="nav-link text-dark" style="font-size: 18px!important;" asp-controller="User" asp-action="Logout">Logout</a>
                                     </li>
                             }
                             else
                         {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                                    <a class="nav-link text-dark" style="font-size: 18px!important;" asp-area="" asp-controller="User" asp-action="Register">Register</a>
                             </li>
                         }}
                     </ul>

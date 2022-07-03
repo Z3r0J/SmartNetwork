@@ -6,6 +6,11 @@ for details on configuring this project to bundle and minify static web assets. 
     --color-custom: #000;
     --background-custom: #10b896 !important;
     --border-color-custom: #24a58b !important;
+    --body-background: linear-gradient(to right top, #051937, #00395b, #005d7a, #00828f, #18a79b);;
+}
+
+.bg-custom {
+background:var(--background-custom);
 }
 
 * {
@@ -19,7 +24,7 @@ a.navbar-brand {
 }
 
 body {
-background:whitesmoke!important;
+background:var(--body-background);
 }
 
 /* Provide sufficient contrast against white background */

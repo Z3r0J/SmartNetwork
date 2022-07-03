@@ -7,16 +7,17 @@
     ViewData["Title"] = "Home Page";
     
 }
-<div class="container-fluid">
-    <div class="row d-flex justify-content-center">
-        @foreach(PostViewModel vm in Model.Posts){
+<div class="container-fluid d-flex justify-content-around">
+    <div class="row">
+        @if(Model.Posts.Count>0){
+        @foreach(PostViewModel vm in Model.Posts.OrderByDescending(x=>x.Id)){
             string name = $"@{vm.User.Username}";
-            <div class="col-7 mt-2 mb-3">
+            <div class="col-10 mt-2 mb-3">
 <div class="panel mt-2 mb-3 w-100 h-100 rounded">
   <div class="panel-body">
     <div class="pane d-flex align-items-center mt-0 mb-3">
       <img
-        class="pane-img border rounded-circle"
+        class="pane-img border rounded-circle border-light shadow"
         style="width: 52px;
     height: 55px;"
         src="@vm.User.PhotoUrl"
@@ -54,10 +55,106 @@
        <span class="btn btn-light border-0 ms-1"><i class="fas fa-comment"></i> @vm.CommentCount Comments</span>
 
     </div>
+            <div class="row mt-4 w-100">
+                <div class="col-12 mt-2 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Comment</h5>
+                            <form>
+                                <textarea class="form-control" id="Body"></textarea>
+                                <input type="hidden" id="PostId" value="@vm.Id"/>
+                                <button type="submit" class="btn btn-custom float-end mt-2 mb-2 ms-2">Comment</button>
+                            </form>
+                        </div>
+                        </div>
+                </div>
+        @if(@vm.CommentCount>0){
+
+    @foreach(var comments in vm.Comments.OrderByDescending(x=>x.Id)){
+        var commentusername =$"@{comments.User.Username}";
+        <div class="col-12 mt-2 mb-3">
+<div class="panel mt-2 mb-3 w-100 h-100 rounded">
+  <div class="panel-body">
+    <div class="pane d-flex align-items-center mt-0 mb-3">
+      <img class="pane-img border rounded-circle" style="width: 52px;
+    height: 55px;" src="@comments.User.PhotoUrl" alt="">
+      <div class="ms-3">
+        <h6 class="m-0" style="font-weight:600;">@comments.User.Name @comments.User.LastName</h6>
+        <p class="m-0 pane-item text-muted">@commentusername</p>
+      </div>
+    </div>
+
+    <div class="card-text fs-5">
+@comments.Body
+
+    </div>
+  </div>
+</div>
+</div>
+    
+    }
+
+    }
+        </div>
   </div>
 </div>
 </div>
 }
+}
+else{
+<p class="text-white fs-2 mt-4">Hey, you don't have a post create one.</p>
+}
+</div>
+<div class="row">
+    <div class="panel border rounded" style="width:19rem;">
+  <div class="panel-body">
+    <div class="d-flex justify-content-between align-item-center mb-1">
+      <h5 class="mb-2">My Friends</h5>
+    </div>
+    @foreach(var vm in Model.FriendsByYou){
+        <hr />
+        
+                  <div class="pane d-flex align-items-center">
+                      <img
+        class="pane-img border rounded-circle shadow"
+        src="@vm.UserTo.PhotoUrl"
+        alt=""
+        style="width: 52px;
+    height: 55px;"
+      />
+      <div class="ms-3 me-3 w-100">
+        <h6 class="m-0" style="font-weight:600;">@vm.UserTo.Name @vm.UserTo.LastName</h6>
+        <p class="m-0 pane-item">@($"@{vm.UserTo.Username}")</p>
+      </div>
+@*      <form class="ms-auto pane-item">
+          <input type="hidden" value="@vm.Id"/>
+          <button type="submit" class="btn btn-light"><i class="fas fa-trash text-danger"></i></button>
+      </form>*@
+    </div> 
+    }
+    @foreach(var vm in Model.FriendsByOther){
+        <hr />
+        
+                  <div class="pane d-flex align-items-center">
+                      <img
+        class="pane-img border rounded-circle shadow"
+        src="@vm.UserFrom.PhotoUrl"
+        alt=""
+        style="width: 52px;
+    height: 55px;"
+      />
+      <div class="ms-3 me-3 w-100">
+        <h6 class="m-0" style="font-weight:600;">@vm.UserFrom.Name @vm.UserFrom.LastName</h6>
+        <p class="m-0 pane-item">@($"@{vm.UserFrom.Username}")</p>
+      </div>
+@*      <form class="ms-auto pane-item">
+          <input type="hidden" value="@vm.Id"/>
+          <button type="submit" class="btn btn-light"><i class="fas fa-trash text-danger"></i></button>
+      </form>*@
+    </div> 
+    }
 
+  </div>
+</div>
 </div>
 </div>
