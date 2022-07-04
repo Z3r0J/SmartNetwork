@@ -30,6 +30,7 @@ namespace SmartNetwork.Infrastructure.Persistence
 
             service.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             service.AddTransient<IUserRepository,UserRepository>();
+            service.AddTransient<ICommentRepository,CommentRepository>();
             #endregion
 
         }

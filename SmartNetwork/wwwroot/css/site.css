@@ -4,9 +4,15 @@ for details on configuring this project to bundle and minify static web assets. 
 
 :root {
     --color-custom: #000;
-    --background-custom: #10b896 !important;
+    --background-custom: #15a299 !important;
     --border-color-custom: #24a58b !important;
-    --body-background: linear-gradient(to right top, #051937, #00395b, #005d7a, #00828f, #18a79b);;
+    --body-background: linear-gradient(to right top, #051937, #00395b, #005d7a, #00828f, #18a79b);
+    ;
+}
+@font-face {
+    font-family: NotoColorEmojiLimited;
+    unicode-range: U+1F1E6-1F1FF;
+    src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
 }
 
 .bg-custom {
@@ -14,7 +20,7 @@ background:var(--background-custom);
 }
 
 * {
-font-family:Poppins;
+    font-family: Poppins,'NotoColorEmojiLimited','Segoe UI Emoji';
 }
 
 a.navbar-brand {

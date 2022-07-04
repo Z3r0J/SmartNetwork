@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using SmartNetwork.Core.Application.Helpers;
 using SmartNetwork.Core.Application.Interfaces.Repository;
 using SmartNetwork.Core.Application.Interfaces.Services;
-using SmartNetwork.Core.Application.ViewModel.Comments;
-using SmartNetwork.Core.Application.ViewModel.Friends;
-using SmartNetwork.Core.Application.ViewModel.Likes;
-using SmartNetwork.Core.Application.ViewModel.Posts;
 using SmartNetwork.Core.Application.ViewModel.Users;
 using SmartNetwork.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SmartNetwork.Core.Application.Services

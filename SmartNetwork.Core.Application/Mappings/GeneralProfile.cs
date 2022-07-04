@@ -53,6 +53,15 @@ namespace SmartNetwork.Core.Application.Mappings
                 .ForMember(dest => dest.LastModified, opt => opt.Ignore())
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
+            CreateMap<Comment, SaveCommentViewModel>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore())
+                .ForMember(dest=>dest.User,opt=>opt.Ignore())
+                .ForMember(dest=>dest.Posts,opt=>opt.Ignore());
+
             CreateMap<Like, LikeViewModel>()
                 .ReverseMap()
                 .ForMember(dest => dest.Created, opt => opt.Ignore())

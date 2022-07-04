@@ -20,4 +20,8 @@
     <ProjectReference Include="..\SmartNetwork.Infrastructure.Shared\SmartNetwork.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Post\" />
+  </ItemGroup>
+
 </Project>

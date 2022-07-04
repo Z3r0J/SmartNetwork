@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using SmartNetwork.Core.Application.Helpers;
+using SmartNetwork.Core.Application.ViewModel.Users;
 using SmartNetwork.Core.Domain.Common;
 using SmartNetwork.Core.Domain.Entities;
 using System;
@@ -12,7 +15,8 @@ namespace SmartNetwork.Infrastructure.Persistence.Contexts
 {
     public class ApplicationContext : DbContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ApplicationContext(DbContextOptions<ApplicationContext> options, IHttpContextAccessor httpContextAccessor) : base(options) { _httpContextAccessor = httpContextAccessor; }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Posts> Posts { get; set; }
@@ -28,11 +32,11 @@ namespace SmartNetwork.Infrastructure.Persistence.Contexts
                 {
                     case EntityState.Added:
                         entry.Entity.Created = DateTime.Now;
-                        entry.Entity.CreatedBy = "DefaultAppUser";
+                        entry.Entity.CreatedBy = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Username;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModified = DateTime.Now;
-                        entry.Entity.LastModifiedBy = "DefaultAppUser";
+                        entry.Entity.LastModifiedBy = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Username;
                         break;
                 }
             }

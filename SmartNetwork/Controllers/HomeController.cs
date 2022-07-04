@@ -27,6 +27,11 @@ namespace SmartNetwork.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (!_validateUserSession.HasUser())
+            {
+                return RedirectToRoute(new { action = "Index", controller = "User" });
+            }
+
             var response = await _userServices.GetAllViewModelWithInclude();
 
             var user = response.FirstOrDefault(x=>x.Id == HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Id);

@@ -7,13 +7,53 @@
     ViewData["Title"] = "Home Page";
     
 }
-<div class="container-fluid d-flex justify-content-around">
-    <div class="row">
+<div class="container-fluid">
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="row">
+                      <div class="col-12 mt-2 mb-3">
+            <div class="card rounded-0">
+                <div class="card-header card-header-pills bg-custom">
+                   <h2 class="text-center fw-bold text-white">New Post</h2>
+                </div>
+                <div class="card-body">
+                    <form enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="form-label card-text fs-5">Body:</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label card-text fs-5">Image (Optional):</label>
+                                <input type="file" name="Image" id="Image" class="form-control"/>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary float-end mt-3 mb-3 w-25">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Click Here
+</a>
+    <div class="row d-flex justify-content-center">
+
         @if(Model.Posts.Count>0){
         @foreach(PostViewModel vm in Model.Posts.OrderByDescending(x=>x.Id)){
             string name = $"@{vm.User.Username}";
-            <div class="col-10 mt-2 mb-3">
-<div class="panel mt-2 mb-3 w-100 h-100 rounded">
+            <div class="col-7 mt-2 mb-3">
+<div class="panel mt-2 mb-3 w-auto h-auto rounded">
   <div class="panel-body">
     <div class="pane d-flex align-items-center mt-0 mb-3">
       <img
@@ -42,10 +82,15 @@
       </div>
     </div>
 
-    <div class="card-text fs-5">
+    <div class="card-text fs-5 mb-3">
 @vm.Body
 
     </div>
+    @if(!string.IsNullOrEmpty(@vm.PictureUrl)){
+    <div class="d-flex justify-content-center mb-1">
+                <img src="@vm.PictureUrl" class="card-img img-fluid w-75 h-25">
+    </div>
+    }
           <div class="d-flex justify-content-between float-start mt-3 mb-3">
        <form>
            <input type="hidden" value="@vm.Id">
@@ -60,9 +105,12 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">New Comment</h5>
-                            <form>
-                                <textarea class="form-control" id="Body"></textarea>
-                                <input type="hidden" id="PostId" value="@vm.Id"/>
+                              <span class="text-danger" style="display:none;" id="error">The comment are empty!</span>
+                            <form method="post" asp-controller="Comment" asp-action="Add">
+                                <textarea class="form-control" id="Body" name="Body" required></textarea>
+                                <input type="hidden" id="PostId" value="@vm.Id" name="PostId"/>
+                                <input type="hidden" id="Act" value="Index" name="Act"/>
+                                <input type="hidden" id="Cont" value="Home" name="Cont"/>
                                 <button type="submit" class="btn btn-custom float-end mt-2 mb-2 ms-2">Comment</button>
                             </form>
                         </div>
@@ -104,57 +152,5 @@
 else{
 <p class="text-white fs-2 mt-4">Hey, you don't have a post create one.</p>
 }
-</div>
-<div class="row">
-    <div class="panel border rounded" style="width:19rem;">
-  <div class="panel-body">
-    <div class="d-flex justify-content-between align-item-center mb-1">
-      <h5 class="mb-2">My Friends</h5>
-    </div>
-    @foreach(var vm in Model.FriendsByYou){
-        <hr />
-        
-                  <div class="pane d-flex align-items-center">
-                      <img
-        class="pane-img border rounded-circle shadow"
-        src="@vm.UserTo.PhotoUrl"
-        alt=""
-        style="width: 52px;
-    height: 55px;"
-      />
-      <div class="ms-3 me-3 w-100">
-        <h6 class="m-0" style="font-weight:600;">@vm.UserTo.Name @vm.UserTo.LastName</h6>
-        <p class="m-0 pane-item">@($"@{vm.UserTo.Username}")</p>
-      </div>
-@*      <form class="ms-auto pane-item">
-          <input type="hidden" value="@vm.Id"/>
-          <button type="submit" class="btn btn-light"><i class="fas fa-trash text-danger"></i></button>
-      </form>*@
-    </div> 
-    }
-    @foreach(var vm in Model.FriendsByOther){
-        <hr />
-        
-                  <div class="pane d-flex align-items-center">
-                      <img
-        class="pane-img border rounded-circle shadow"
-        src="@vm.UserFrom.PhotoUrl"
-        alt=""
-        style="width: 52px;
-    height: 55px;"
-      />
-      <div class="ms-3 me-3 w-100">
-        <h6 class="m-0" style="font-weight:600;">@vm.UserFrom.Name @vm.UserFrom.LastName</h6>
-        <p class="m-0 pane-item">@($"@{vm.UserFrom.Username}")</p>
-      </div>
-@*      <form class="ms-auto pane-item">
-          <input type="hidden" value="@vm.Id"/>
-          <button type="submit" class="btn btn-light"><i class="fas fa-trash text-danger"></i></button>
-      </form>*@
-    </div> 
-    }
-
-  </div>
-</div>
 </div>
 </div>

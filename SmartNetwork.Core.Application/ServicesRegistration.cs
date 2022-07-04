@@ -17,6 +17,7 @@ namespace SmartNetwork.Core.Application
             service.AddAutoMapper(Assembly.GetExecutingAssembly());
             service.AddTransient(typeof(IGenericServices<,,>),typeof(GenericServices<,,>));
             service.AddTransient<IUserServices, UserServices>();
+            service.AddTransient<ICommentServices, CommentServices>();
         }
     }
 }
