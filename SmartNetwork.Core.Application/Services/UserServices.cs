@@ -55,6 +55,13 @@ namespace SmartNetwork.Core.Application.Services
             return response != null ? true : false;
         }
 
+        public async Task<UserViewModel> GetUserbyUsername(string username)
+        {
+            var response = await _repository.CheckUsername(username);
+
+            return response != null ? _mapper.Map<UserViewModel>(response) : null;
+        }
+
         public async Task ChangePassword(string username) {
 
             var response = await _repository.CheckUsername(username);

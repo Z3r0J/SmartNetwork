@@ -25,10 +25,10 @@
                         <div class="row">
                             <div class="col-8">
                                 <label class="form-label card-text fs-5">Body:</label>
-                                <textarea class="form-control" id="Body" name="Body" required></textarea>
+                                <textarea class="form-control" id="Body" name="Body"></textarea>
                             </div>
                             <div class="col-4">
-                                <label class="form-label card-text fs-5">Image (Optional):</label>
+                                <label class="form-label card-text fs-5">Image:</label>
                                 <input type="file" name="Image" id="Image" class="form-control"/>
                             </div>
                         </div>
@@ -45,9 +45,12 @@
     </div>
   </div>
 </div>
-        <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Click Here
+<div class="border-start border-dark border-5 d-flex justify-content-between">
+    <h1 class="text-lg-start fs-4 text-white">&nbsp;My Posts</h1>
+        <a class="text-decoration-none btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Create new
 </a>
+</div>
     <div class="row d-flex justify-content-center">
 
         @if(Model.Posts.Count>0){

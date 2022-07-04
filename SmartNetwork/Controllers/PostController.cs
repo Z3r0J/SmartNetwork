@@ -117,12 +117,25 @@ namespace WebApp.SmartNetwork.Controllers
                 return RedirectToRoute(new { action="Index",controller="User" });
             }
 
-            if (!ModelState.IsValid) {
-                ViewBag.Error = "The body is required";
-                return RedirectToRoute("Index", "Home");
+            if (model.Image==null&&string.IsNullOrWhiteSpace(model.Body))
+            {
+                ViewBag.Error = "The field was empty";
+                return RedirectToAction("Index", "Home");
             }
-
             model.UserId = HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Id;
+
+            if (model.Image != null && string.IsNullOrWhiteSpace(model.Body)) {
+
+                model.Body = "";
+                var post = await _postServices.Add(model);
+
+                post.PictureUrl = UploadFile(model.Image, post.Id);
+                await _postServices.Update(post, post
+                    .Id);
+
+                return RedirectToAction("Index", "Home");
+
+            }
 
             var response = await _postServices.Add(model);
 

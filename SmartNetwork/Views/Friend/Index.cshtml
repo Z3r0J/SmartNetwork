@@ -1,0 +1,305 @@
+﻿@using SmartNetwork.Core.Application.ViewModel.Friends
+@using SmartNetwork.Core.Application.ViewModel.Users
+@using SmartNetwork.Core.Application.ViewModel.Posts
+
+@model UserViewModel
+@{
+    ViewData["Title"] = "Friends";
+}
+<div class="container-fluid d-flex justify-content-around">
+        <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="row">
+                      <div class="col-12 mt-2 mb-3">
+            <div class="card rounded-0">
+                <div class="card-header card-header-pills bg-custom">
+                   <h2 class="text-center fw-bold text-white">New Friend</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Add" asp-controller="Friend">
+                        <div class="row">
+                            <div class="col-12 align-content-center">
+                                <label class="form-label card-text fs-5">Username:</label>
+                                <input type="text" class="form-control" id="Username" name="Username"/>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary float-end mt-3 mb-3 w-25">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="row">
+                <div class="border-start border-dark border-5 d-flex justify-content-between">
+    <h1 class="text-lg-start fs-4 text-white">&nbsp;Friends Posts</h1>
+</div>
+    @if (Model.FriendsByYou.Count > 0)
+    {
+        @foreach (FriendViewModel item in Model.FriendsByYou)
+        {
+            foreach (PostViewModel vm in item.UserTo.Posts.OrderByDescending(x => x.Id))
+            {
+                            string name = $"@{vm.User.Username}";
+            <div class="col-11 mt-2 mb-3">
+<div class="panel mt-2 mb-3 w-auto h-auto rounded shadow">
+  <div class="panel-body">
+    <div class="pane d-flex align-items-center mt-0 mb-3">
+      <img
+        class="pane-img border rounded-circle border-light shadow"
+        style="width: 52px;
+    height: 55px;"
+        src="@vm.User.PhotoUrl"
+        alt=""
+      />
+      <div class="ms-3">
+        <h6 class="m-0" style="font-weight:600;">@vm.User.Name @vm.User.LastName</h6>
+        <p class="m-0 pane-item text-muted">@name</p>
+      </div>
+    </div>
+
+    <div class="card-text fs-5 mb-3">
+@vm.Body
+
+    </div>
+    @if(!string.IsNullOrEmpty(@vm.PictureUrl)){
+    <div class="d-flex justify-content-center mb-1">
+                <img src="@vm.PictureUrl" class="card-img img-fluid w-75 h-25">
+    </div>
+    }
+          <div class="d-flex justify-content-between float-start mt-3 mb-3">
+       <form method="post" asp-action="Add" asp-controller="Like">
+           <input type="hidden" value="@vm.Id" name="PostId" id="PostId">
+           <input type="hidden" id="Act" value="Index" name="Act"/>
+           <input type="hidden" id="Cont" value="Friend" name="Cont"/>
+           <button type="submit" class="btn btn-light text-info border border-0 me-1"><i class="fas fa-heart"></i> @vm.LikeCount Likes</button>
+       </form>
+
+       <span class="btn btn-light border-0 ms-1"><i class="fas fa-comment"></i> @vm.CommentCount Comments</span>
+
+    </div>
+            <div class="row mt-4 w-100">
+                <div class="col-12 mt-2 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Comment</h5>
+                              <span class="text-danger" style="display:none;" id="error">The comment are empty!</span>
+                            <form method="post" asp-controller="Comment" asp-action="Add">
+                                <textarea class="form-control" id="Body" name="Body" required></textarea>
+                                <input type="hidden" id="PostId" value="@vm.Id" name="PostId"/>
+                                <input type="hidden" id="Act" value="Index" name="Act"/>
+                                <input type="hidden" id="Cont" value="Friend" name="Cont"/>
+                                <button type="submit" class="btn btn-custom float-end mt-2 mb-2 ms-2">Comment</button>
+                            </form>
+                        </div>
+                        </div>
+                </div>
+        @if(@vm.CommentCount>0){
+
+    @foreach(var comments in vm.Comments.OrderByDescending(x=>x.Id)){
+        var commentusername =$"@{comments.User.Username}";
+        <div class="col-12 mt-2 mb-3">
+<div class="panel mt-2 mb-3 w-100 h-100 rounded">
+  <div class="panel-body">
+    <div class="pane d-flex align-items-center mt-0 mb-3">
+      <img class="pane-img border rounded-circle" style="width: 52px;
+    height: 55px;" src="@comments.User.PhotoUrl" alt="">
+      <div class="ms-3">
+        <h6 class="m-0" style="font-weight:600;">@comments.User.Name @comments.User.LastName</h6>
+        <p class="m-0 pane-item text-muted">@commentusername</p>
+      </div>
+    </div>
+
+    <div class="card-text fs-5">
+@comments.Body
+
+    </div>
+  </div>
+</div>
+</div>
+    
+    }
+
+    }
+        </div>
+  </div>
+</div>
+</div>
+            }
+        }
+
+    }
+
+    @if (Model.FriendsByOther.Count > 0)
+    {
+        @foreach (FriendViewModel item in Model.FriendsByOther)
+        {
+            foreach (PostViewModel vm in item.UserFrom.Posts.OrderByDescending(x => x.Id))
+            {
+                            string name = $"@{vm.User.Username}";
+            <div class="col-11 mt-2 mb-3">
+<div class="panel mt-2 mb-3 w-auto h-auto rounded shadow">
+  <div class="panel-body">
+    <div class="pane d-flex align-items-center mt-0 mb-3">
+      <img
+        class="pane-img border rounded-circle border-light shadow"
+        style="width: 52px;
+    height: 55px;"
+        src="@vm.User.PhotoUrl"
+        alt=""
+      />
+      <div class="ms-3">
+        <h6 class="m-0" style="font-weight:600;">@vm.User.Name @vm.User.LastName</h6>
+        <p class="m-0 pane-item text-muted">@name</p>
+      </div>
+    </div>
+
+    <div class="card-text fs-5 mb-3">
+@vm.Body
+
+    </div>
+    @if(!string.IsNullOrEmpty(@vm.PictureUrl)){
+    <div class="d-flex justify-content-center mb-1">
+                <img src="@vm.PictureUrl" class="card-img img-fluid w-75 h-25">
+    </div>
+    }
+          <div class="d-flex justify-content-between float-start mt-3 mb-3">
+       <form method="post" asp-action="Add" asp-controller="Like">
+           <input type="hidden" value="@vm.Id" name="PostId" id="PostId">
+           <input type="hidden" id="Act" value="Index" name="Act"/>
+           <input type="hidden" id="Cont" value="Friend" name="Cont"/>
+           <button type="submit" class="btn btn-light text-info border border-0 me-1"><i class="fas fa-heart"></i> @vm.LikeCount Likes</button>
+       </form>
+
+       <span class="btn btn-light border-0 ms-1"><i class="fas fa-comment"></i> @vm.CommentCount Comments</span>
+
+    </div>
+            <div class="row mt-4 w-100">
+                <div class="col-12 mt-2 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Comment</h5>
+                              <span class="text-danger" style="display:none;" id="error">The comment are empty!</span>
+                            <form method="post" asp-controller="Comment" asp-action="Add">
+                                <textarea class="form-control" id="Body" name="Body" required></textarea>
+                                <input type="hidden" id="PostId" value="@vm.Id" name="PostId"/>
+                                <input type="hidden" id="Act" value="Index" name="Act"/>
+                                <input type="hidden" id="Cont" value="Friend" name="Cont"/>
+                                <button type="submit" class="btn btn-custom float-end mt-2 mb-2 ms-2">Comment</button>
+                            </form>
+                        </div>
+                        </div>
+                </div>
+        @if(@vm.CommentCount>0){
+
+    @foreach(var comments in vm.Comments.OrderByDescending(x=>x.Id)){
+        var commentusername =$"@{comments.User.Username}";
+        <div class="col-12 mt-2 mb-3">
+<div class="panel mt-2 mb-3 w-100 h-100 rounded">
+  <div class="panel-body">
+    <div class="pane d-flex align-items-center mt-0 mb-3">
+      <img class="pane-img border rounded-circle" style="width: 52px;
+    height: 55px;" src="@comments.User.PhotoUrl" alt="">
+      <div class="ms-3">
+        <h6 class="m-0" style="font-weight:600;">@comments.User.Name @comments.User.LastName</h6>
+        <p class="m-0 pane-item text-muted">@commentusername</p>
+      </div>
+    </div>
+
+    <div class="card-text fs-5">
+@comments.Body
+
+    </div>
+  </div>
+</div>
+</div>
+    
+    }
+
+    }
+        </div>
+  </div>
+</div>
+</div>
+            }
+        }
+    }
+</div>
+<div class="row">
+<div class="col-2 mt-4 mb-3">
+    <div class="panel rounded shadow border border-light" style="width: 25rem">
+  <div class="panel-body">
+                        @Html.ValidationSummary(false,"",new{@class="text-danger"})
+    <div class="d-flex justify-content-between align-item-center mb-1">
+      <p class="mb-0">My Friends</p>
+              <a
+          class="fa fa-plus fs-5 btn btn-success"
+          data-bs-toggle="modal" data-bs-target="#exampleModal"
+        >
+        </a>
+    </div>
+
+@if(Model.FriendsByYou.Count>0){
+
+    @foreach(FriendViewModel vm in Model.FriendsByYou){
+    <hr />    
+            <div class="pane d-flex align-items-center">
+      <img
+        class="pane-img border border-light rounded-circle shadow me-1"
+        src="@vm.UserTo.PhotoUrl"
+        alt=""
+        style="width: 52px;
+    height: 55px;"
+      />
+      <div class="me-3">
+        <h6 class="m-0" style="font-weight:600;">@vm.UserTo.Name @vm.UserTo.LastName</h6>
+        <p class="m-0 pane-item text-muted">@($"@{vm.UserTo.Username}")</p>
+      </div>
+      <div class="ms-auto pane-item">
+          <a asp-action="Delete" asp-controller="Friend" asp-route-id="@vm.Id" class="btn btn-danger "><i class="fas fa-trash"></i></a>
+      </div>
+    </div>
+
+    }
+}
+@if(Model.FriendsByOther.Count>0){
+
+    @foreach(FriendViewModel vm in Model.FriendsByOther){
+    <hr />    
+            <div class="pane d-flex align-items-center">
+      <img
+        class="pane-img border border-light rounded-circle shadow me-1"
+        src="@vm.UserFrom.PhotoUrl"
+        alt=""
+        style="width: 52px;
+    height: 55px;"
+      />
+      <div class="me-3">
+        <h6 class="m-0" style="font-weight:600;">@vm.UserFrom.Name @vm.UserFrom.LastName</h6>
+        <p class="m-0 pane-item text-muted">@($"@{vm.UserFrom.Username}")</p>
+      </div>
+      <div class="ms-auto pane-item">
+          <a asp-action="Delete" asp-controller="Friend" asp-route-id="@vm.Id" class="btn btn-danger "><i class="fas fa-trash"></i></a>
+      </div>
+    </div>
+
+    }
+}
+
+
+  </div>
+</div>
+</div>
+</div>
+</div>

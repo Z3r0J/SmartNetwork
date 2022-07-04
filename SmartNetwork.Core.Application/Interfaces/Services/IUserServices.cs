@@ -14,5 +14,6 @@ namespace SmartNetwork.Core.Application.Interfaces.Services
         Task<bool> CheckUsername(string username);
         Task ChangePassword(string username);
         Task<List<UserViewModel>> GetAllViewModelWithInclude();
+        Task<UserViewModel> GetUserbyUsername(string username);
     }
 }

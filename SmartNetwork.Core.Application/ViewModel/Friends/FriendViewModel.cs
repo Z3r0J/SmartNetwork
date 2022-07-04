@@ -16,8 +16,5 @@ namespace SmartNetwork.Core.Application.ViewModel.Friends
         public int UserSecond { get; set; }
         public UserViewModel UserTo { get; set; }
 
-        public List<PostViewModel> UserFirstPost { get; set; }
-        public List<PostViewModel> UserSecondPost { get; set; }
-
     }
 }

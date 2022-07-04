@@ -20,6 +20,7 @@ namespace SmartNetwork.Core.Application
             service.AddTransient<ICommentServices, CommentServices>();
             service.AddTransient<IPostServices, PostServices>();
             service.AddTransient<ILikeServices, LikeServices>();
+            service.AddTransient<IFriendServices, FriendServices>();
         }
     }
 }

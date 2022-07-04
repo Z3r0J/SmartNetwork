@@ -11,7 +11,6 @@ namespace SmartNetwork.Core.Application.ViewModel.Posts
     public class SavePostViewModel
     {
         public int Id { get; set; }
-        [Required(ErrorMessage ="The body is required")]
         public string Body { get; set; }
         public string PictureUrl { get; set; }
         public int UserId { get; set; }
