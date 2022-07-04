@@ -35,13 +35,53 @@ namespace WebApp.SmartNetwork.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Edit(SavePostViewModel model) {
+
             if (!_validateUserSession.HasUser())
             {
                 return RedirectToRoute(new { action = "Index", controller = "User" });
             }
-            if (!ModelState.IsValid)
-            {
+
+            if (model.PictureUrl == null && string.IsNullOrEmpty(model.Body)) {
+
+                ModelState.AddModelError("Body", "The text is required.");
+
                 return View(model);
+
+            }
+
+            if (model.PictureUrl != null && model.Image != null && string.IsNullOrWhiteSpace(model.Body))
+            {
+                model.Body = "";
+                if (!string.IsNullOrEmpty(model.PictureUrl))
+                {
+                    model.PictureUrl = UploadFile(model.Image, model.Id, true, model.PictureUrl);
+                }
+                else
+                {
+                    model.PictureUrl = UploadFile(model.Image, model.Id);
+                }
+
+                await _postServices.Update(model, model.Id);
+
+                return RedirectToRoute(new { action = "Index", controller = "Home" });
+
+            }
+
+            if (model.PictureUrl == null && model.Image == null && !string.IsNullOrWhiteSpace(model.Body))
+            {
+               await _postServices.Update(model, model.Id);
+
+                return RedirectToRoute(new { action = "Index", controller = "Home" });
+
+            }
+
+            if (model.PictureUrl!=null && string.IsNullOrWhiteSpace(model.Body))
+            {
+                model.Body = "";
+
+                await _postServices.Update(model, model.Id);
+                return RedirectToRoute(new { action = "Index", controller = "Home" });
+
             }
 
             if (model.Image!=null)
