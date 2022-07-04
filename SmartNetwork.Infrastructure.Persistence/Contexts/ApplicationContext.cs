@@ -32,11 +32,11 @@ namespace SmartNetwork.Infrastructure.Persistence.Contexts
                 {
                     case EntityState.Added:
                         entry.Entity.Created = DateTime.Now;
-                        entry.Entity.CreatedBy = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Username;
+                        entry.Entity.CreatedBy = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Username!=null? _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Username : "DefaultUserApp";
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModified = DateTime.Now;
-                        entry.Entity.LastModifiedBy = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Username;
+                        entry.Entity.LastModifiedBy = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Username!=null? _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Username : "DefaultUserApp";
                         break;
                 }
             }
