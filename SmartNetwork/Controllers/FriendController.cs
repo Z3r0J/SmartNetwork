@@ -89,7 +89,7 @@ namespace WebApp.SmartNetwork.Controllers
 
             var friend = await _friendServices.GetByIdSaveViewModel(Id);
 
-            return (friend.UserFirst != HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Id || friend.UserSecond != HttpContext.Session.Get<UserViewModel>("userSmartNetwork").Id) ? RedirectToRoute(new { action = "Index", controller = "Home" }) : View(friend);
+            return View(friend);
 
         }
         [HttpPost]
