@@ -77,7 +77,7 @@ namespace WebApp.SmartNetwork.Controllers
 
             }
             await _friendServices.Add(model);
-            return RedirectToRoute(new { action = "Index", controller = "Home" });
+            return RedirectToRoute(new { action = "Index", controller = "Friend" });
         }
         public async Task<IActionResult> Delete(int Id)
         {
@@ -93,7 +93,7 @@ namespace WebApp.SmartNetwork.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(FriendViewModel vm) {
+        public async Task<IActionResult> Delete(SaveFriendViewModel vm) {
 
             if (!_validateUserSession.HasUser())
             {
