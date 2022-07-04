@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartNetwork.Core.Application.Interfaces.Repository
 {
-    public interface IPostRepository : IGenericRepository<Posts>
+    public interface ICommentRepository : IGenericRepository<Comment>
     {
 
     }

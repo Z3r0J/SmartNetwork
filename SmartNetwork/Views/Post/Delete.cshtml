@@ -1,0 +1,40 @@
+﻿@using SmartNetwork.Core.Application.ViewModel.Posts
+@model SavePostViewModel
+
+@{
+    ViewData["Title"] = "Delete Post";
+}
+
+<div class="container-fluid">
+              <div class="row d-flex justify-content-center">
+                      <div class="col-6 mt-2 mb-3">
+            <div class="card rounded-0">
+                <div class="card-header card-header-pills bg-custom">
+                   <h2 class="text-center fw-bold text-white">Delete Post</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" asp-action="Delete" asp-controller="Post">
+                        <div class="row">
+            <div class="col-7 mt-2 mb-3">
+<div class="panel mt-2 mb-3 w-auto h-auto rounded">
+  <div class="panel-body">
+    <div class="card-text fs-5 mb-3">
+@Model.Body
+
+    </div>
+    @if(!string.IsNullOrEmpty(Model.PictureUrl)){
+    <div class="d-flex justify-content-center mb-1">
+                <img src="@Model.PictureUrl" class="card-img img-fluid w-75 h-25">
+    </div>
+    }
+  </div>
+</div>
+</div>
+                        </div>
+                        <button type="submit" class="btn btn-danger float-end mt-3 mb-3 w-25">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+          </div>
+</div>

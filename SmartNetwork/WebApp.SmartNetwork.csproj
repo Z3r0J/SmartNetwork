@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Post\" />
+    <Folder Include="Views\Post\NewFolder\" />
   </ItemGroup>
 
 </Project>

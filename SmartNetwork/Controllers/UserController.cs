@@ -124,7 +124,7 @@ namespace WebApp.SmartNetwork.Controllers
 
             if (!await _userServices.CheckUsername(username))
             {
-                ModelState.AddModelError("Username", "The username doesn't exist.");
+                ModelState.AddModelError("Username", "The username has been taken.");
                 return View("Index");
             }
 

@@ -18,6 +18,7 @@ namespace SmartNetwork.Core.Application
             service.AddTransient(typeof(IGenericServices<,,>),typeof(GenericServices<,,>));
             service.AddTransient<IUserServices, UserServices>();
             service.AddTransient<ICommentServices, CommentServices>();
+            service.AddTransient<IPostServices, PostServices>();
         }
     }
 }

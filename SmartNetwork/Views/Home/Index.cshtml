@@ -20,11 +20,12 @@
                    <h2 class="text-center fw-bold text-white">New Post</h2>
                 </div>
                 <div class="card-body">
-                    <form enctype="multipart/form-data">
+                    @if(!string.IsNullOrEmpty(ViewBag.Error)){<span class="text-danger">@ViewBag.Error</span>}
+                    <form method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Post">
                         <div class="row">
                             <div class="col-8">
                                 <label class="form-label card-text fs-5">Body:</label>
-                                <textarea class="form-control"></textarea>
+                                <textarea class="form-control" id="Body" name="Body" required></textarea>
                             </div>
                             <div class="col-4">
                                 <label class="form-label card-text fs-5">Image (Optional):</label>
