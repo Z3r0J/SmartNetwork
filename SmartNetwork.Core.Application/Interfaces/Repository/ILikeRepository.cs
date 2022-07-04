@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SmartNetwork.Core.Application.Interfaces.Repository
 {
-    public interface IPostRepository : IGenericRepository<Posts>
+    public interface ILikeRepository : IGenericRepository<Like>
     {
-
+        Task<Like> GetLikeExist(Like entity);
     }
 }

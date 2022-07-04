@@ -75,9 +75,8 @@
   </i>
 
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><a class="dropdown-item" asp-action="Edit" asp-controller="Post" asp-route-id=@vm.Id><i class="fas fa-pencil"></i> Edit</a></li>
+    <li><a class="dropdown-item" asp-action="Delete" asp-controller="Post" asp-route-id=@vm.Id><i class="fas fa-trash"></i> Delete</a></li>
   </ul>
 </div>
       </div>
@@ -93,8 +92,10 @@
     </div>
     }
           <div class="d-flex justify-content-between float-start mt-3 mb-3">
-       <form>
-           <input type="hidden" value="@vm.Id">
+       <form method="post" asp-action="Add" asp-controller="Like">
+           <input type="hidden" value="@vm.Id" name="PostId" id="PostId">
+           <input type="hidden" id="Act" value="Index" name="Act"/>
+           <input type="hidden" id="Cont" value="Home" name="Cont"/>
            <button type="submit" class="btn btn-light text-info border border-0 me-1"><i class="fas fa-heart"></i> @vm.LikeCount Likes</button>
        </form>
 
